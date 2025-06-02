@@ -71,9 +71,9 @@ def remove_model(model_name):
 def load_model(model, model_name, optimizer=None, scheduler=None, strict=True):
     data = torch.load(f"{BASE_PATH}{model_name}.pt")
 
-    unexpted_keys, missing_keys = model.load_state_dict(data['model_state_dict'],strict=strict)
+    missing_keys, unexpted_keys = model.load_state_dict(data['model_state_dict'],strict=strict)
     if not strict:
-        print("Unexpected Keys:",unexpted_keys, "Missing Keys", missing_keys)
+        print("Missing Keys", missing_keys, "Unexpected Keys:",unexpted_keys)
         
     epoch = data['epoch']
 
